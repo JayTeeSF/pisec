@@ -1,0 +1,25 @@
+#!/usr/bin/env ruby
+
+require 'net/ssh/gateway'
+require 'json'
+require 'mysql2'
+require_relative '../lib/stat_fetcher/client'
+
+require 'optparse'
+
+options = {}
+opt_parser = OptionParser.new do |opts|
+  opts.banner = "Usage: #{$0} [OPTIONS]..."
+
+  #opts.on( "-a", "--all", "show all params") do |a|
+  #  options[:mode] = :all
+  #end
+
+  opts.on_tail( '-h', '--help', 'This help screen' ) do
+    puts opts
+    exit
+  end
+end
+opt_parser.parse!
+
+puts StatFetcher::Client.fetch
