@@ -23,8 +23,9 @@ configure it:
   # The format for this file is essentially:
   # export <NAMESPACE>_<UPPERCASE_KEY_NAME>={<lowercase_key_name> => <val>}.to_json
   # e.g.
-  # export PISEC_DEV_DB_USER="{\"dev_db_user\":\"pisec\"}"
+  export PISEC_DEV_DB_USER="{\"dev_db_user\":\"pisec\"}"
 
+Rails:
 initialize it:
   vi config/initializers/pisec.rb:
     Settings = Pisec::Support.load_file(
@@ -34,6 +35,10 @@ initialize it:
 
 use it:
   Settings.get("dev_db_user")
+
+Shell:
+  #            config-file   namespace lookup-key
+  ./bin/pisec -c README.md  -n PISEC  -l dev_db_user
 
 ## Contributing
 
