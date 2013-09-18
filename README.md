@@ -19,10 +19,21 @@ Or install it yourself as:
 ## Usage
 
 configure it:
-  vi config/secure_settings.sh
+  vi config/secure_settings.sh:
+  # The format for this file is essentially:
+  # export <NAMESPACE>_<UPPERCASE_KEY_NAME>={<lowercase_key_name> => <val>}.to_json
+  # e.g.
+  # export PISEC_DEV_DB_USER="{\"dev_db_user\":\"pisec\"}"
 
-run it:
-  ↪ bin/pisec --help
+initialize it:
+  vi config/initializers/pisec.rb:
+    Settings = Pisec::Support.load_file(
+     "#{RAILS_ROOT}/config/secure_settings.sh", # data-file
+     "PISEC" # namespace
+    )
+
+use it:
+  Settings.get("dev_db_user")
 
 ## Contributing
 
